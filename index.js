@@ -1,8 +1,11 @@
-const allEmptySquares = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+let allEmptySquares = [0, 1, 2, 3, 4, 5, 6, 7, 8]
 const squares = document.querySelectorAll('.square')
 const arrayOfSquares = Array.from(squares)
+const message = document.querySelector('.message')
 
-const getSquareContent = () => {
+let completed
+
+const checkContent = () => {
     const leftColumn = [arrayOfSquares[0].textContent, arrayOfSquares[3].textContent, arrayOfSquares[6].textContent]
     const centerColumn = [arrayOfSquares[1].textContent, arrayOfSquares[4].textContent, arrayOfSquares[7].textContent]
     const rightColumn = [arrayOfSquares[2].textContent, arrayOfSquares[5].textContent, arrayOfSquares[8].textContent]
@@ -16,14 +19,29 @@ const getSquareContent = () => {
 
     let allContent = [leftColumn, centerColumn, rightColumn, topRow, centerRow, bottomRow, topLeftDiagonal, topRightDiagonal]
 
-    const completed = allContent.filter(item => {
+    completed = allContent.some(item => {
         return item.every(element => {
             return element === item[0] && item[0] !== ""
         })
     })
+    
+    if (completed) {
+        const completedLine = allContent.filter(item => {
+            return item.every(element => {
+                return element === item[0] && item[0] !== ""
+            })
+        })
 
-    console.log(completed[0][0])
+        message.classList.add('active')
 
+        if (completedLine[0].includes('X')) {
+            message.textContent = 'Good job! You won!'
+        } else if (completedLine[0].includes('O')) {
+            message.textContent = 'Oops, we won...'
+        }
+
+        return
+    }
 }
 
 const getRandomNumber = () => {
@@ -38,12 +56,16 @@ const getComputerSelection = () => {
     allEmptySquares.splice(allEmptySquares.indexOf(currentSelectionIndex), 1)
     
     // loop through squares to find the square that corresponds to the random index
-    const computerSelection = Array.from(squares).filter((square, index) => {
+    const computerSelection = arrayOfSquares.filter((square, index) => {
         return index === currentSelectionIndex
     })
 
     // set square's content
     computerSelection[0].textContent = 'O'
+
+    if (allEmptySquares.length <= 6) {
+        checkContent()
+    }
 }
 
 const getUserSelection = (userSelection, currentIndex) => {
@@ -53,12 +75,18 @@ const getUserSelection = (userSelection, currentIndex) => {
     // remove respective item from allEmptySquares
     const currentUserSelection = allEmptySquares.indexOf(currentIndex)
     allEmptySquares.splice(currentUserSelection, 1)
-
-    // get computer selection after 1 second
-    setTimeout(() => {
-        // get computer selection based on random number
-        getComputerSelection()
-    }, 1000)
+    
+    if (allEmptySquares.length <= 6) {
+        checkContent()
+    }
+    
+    if (!completed) {
+        // get computer selection after 1 second
+        setTimeout(() => {
+            // get computer selection based on random number
+            getComputerSelection()
+        }, 1000)
+    }
 
 }
 
@@ -66,7 +94,5 @@ arrayOfSquares.map((square, index) => {
     square.addEventListener('click', () => {
         // get user selection based on user's click
         getUserSelection(square, index)
-
-        getSquareContent()
     })
 })

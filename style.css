@@ -1,17 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+
 body {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: #30292F;
+    height: 100vh;
+    font-family: 'Nunito', sans-serif;
 }
 
 .container {
     display: grid;
     grid-template: repeat(3, 1fr) / repeat(3, 1fr);
-
+    grid-gap: 2px;
+    
     width: 30rem;
     height: 30rem;
+    
+    background-color: #5D737E;
 }
 
 .square {
-    border: 1px solid black
+    background-color: #30292F;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    font-family: 'Itim', cursive;
+    font-size: 2rem;
+    color: #fcfcfc;
+    
+    cursor: pointer;
+}
+
+.message {
+    opacity: 0;
+}
+
+.message.active {
+    position: absolute;
+
+    opacity: 1;
+    width: 100%;
+    background: rgba( 255, 254, 254, 0.25 );
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    backdrop-filter: blur( 7.5px );
+    -webkit-backdrop-filter: blur( 7.5px );
+    border-radius: 10px;
+
+    color: #fcfcfc;
+    font-size: 1.5rem;
+    text-align: center;
+    padding: 1rem;
+    transform: skewY(-3deg);
+
+    transition: all .5s ease-in-out
 }
