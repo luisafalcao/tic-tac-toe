@@ -37,6 +37,7 @@ body {
 
 .message {
     opacity: 0;
+    cursor: pointer;
 }
 
 .message.active {
