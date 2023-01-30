@@ -96,3 +96,12 @@ arrayOfSquares.map((square, index) => {
         getUserSelection(square, index)
     })
 })
+
+message.addEventListener('click', () => {
+    // reset
+    message.classList.remove('active')
+    allEmptySquares = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+    arrayOfSquares.map(square => square.textContent = "")
+
+    completed = !completed
+})
