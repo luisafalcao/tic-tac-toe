@@ -60,3 +60,28 @@ body {
 
     transition: all .5s ease-in-out
 }
+
+.start-button {
+    display: block;
+    all: unset;
+
+    border: 2px solid #5D737E;
+    color: #fcfcfc;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    cursor: pointer;
+
+    transition: background-color .5s ease;
+}
+
+.start-button:hover {
+    background-color: #5D737E;
+}
+
+.start-button:active {
+    scale: .95;
+}
+
+.start-button.hidden {
+    display: none;
+}

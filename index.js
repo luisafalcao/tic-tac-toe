@@ -1,7 +1,13 @@
 let allEmptySquares = [0, 1, 2, 3, 4, 5, 6, 7, 8]
 const squares = Array.from(document.querySelectorAll('.square'))
 const message = document.querySelector('.message')
+const startButton = document.querySelector('.start-button')
 let completed
+
+startButton.addEventListener('click', () => {
+    getComputerSelection(0)
+    startButton.classList.add('hidden')
+})
 
 const checkContent = () => {
     const leftColumn = [squares[0].textContent, squares[3].textContent, squares[6].textContent]
@@ -31,11 +37,12 @@ const checkContent = () => {
         })
 
         message.classList.add('active')
+        startButton.classList.remove('hidden')
 
         if (completedLine[0].includes('X')) {
-            message.textContent = 'Good job! You won! Click here to restart'
+            message.textContent = "Wow, you won! Click here to restart"
         } else if (completedLine[0].includes('O')) {
-            message.textContent = 'Oops, we won...'
+            message.textContent = "Oops, looks live we've won... Click here to restart"
         }
 
         return
