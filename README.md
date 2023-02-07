@@ -7,3 +7,5 @@ Currently, the game allows for the user to play against the computer, but future
 - User's ability to choose their symbol;
 - Score keeping;
 - Restart game in case of a tie.
+
+Demo: https://ttictactoe.netlify.app
